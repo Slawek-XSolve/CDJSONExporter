@@ -13,6 +13,7 @@
 
 // `auxiliary`: a dictionary with values that are stored into the exported JSON as well.
 //              all keys and values should be NSString objects.
++ (NSDictionary *)exportToJSONContext:(NSManagedObjectContext *)context auxiliaryInfo:(NSDictionary *)auxiliary;
 + (NSData *)exportContext:(NSManagedObjectContext *)context auxiliaryInfo:(NSDictionary *)auxiliary;
 
 // import data.

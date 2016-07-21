@@ -26,6 +26,11 @@ static NSString *kRelationshipsKey = @"Rels";
 @implementation CDJSONExporter
 
 + (NSData *)exportContext:(NSManagedObjectContext *)context auxiliaryInfo:(NSDictionary *)auxiliary {
+    NSDictionary *jsonDict = [self exportToJSONContext:context auxiliaryInfo:auxiliary];
+
+    return [NSJSONSerialization dataWithJSONObject:jsonDict options:0 error:nil]; // option for debugging: NSJSONWritingPrettyPrinted
+}
++ (NSDictionary *)exportToJSONContext:(NSManagedObjectContext *)context auxiliaryInfo:(NSDictionary *)auxiliary {
     // the exported data is a dictionary that maps from entity names to lists/arrays of exported objects.
     // each exported object maps property names to exported values.
     // exported values for most basic attributes are just whatever NSJSONSerialization does with them.
@@ -169,7 +174,7 @@ static NSString *kRelationshipsKey = @"Rels";
         [data setObject:[auxiliary objectForKey:key] forKey:[NSString stringWithFormat:@"_%@", key]];
     }
     
-    return [NSJSONSerialization dataWithJSONObject:data options:0 error:nil]; // option for debugging: NSJSONWritingPrettyPrinted
+    return [data copy];
 }
 
 + (BOOL)importData:(NSData *)data toContext:(NSManagedObjectContext *)context clear:(BOOL)clearContext {
