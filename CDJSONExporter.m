@@ -91,6 +91,9 @@ static NSString *kRelationshipsKey = @"Rels";
                                      [[CodingValueTransformer alloc] init] :
                                      [NSValueTransformer valueTransformerForName:transformerName]);
                                 });
+                                if (!transformer)
+                                    transformer = [[CodingValueTransformer alloc] init];
+
                                 NSData *transformed = [transformer transformedValue:val];
                                 
                                 [attrs setValue:@{kValueKey:[transformed base64EncodedString]} // a dictionary as value without a value for kClassKey implies a transformed val
