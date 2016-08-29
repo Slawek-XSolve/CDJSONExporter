@@ -7,7 +7,9 @@
 //
 
 #import "CDJSONExporter.h"
-#import <NSData+Base64/NSData+Base64.h>
+
+@import NSData_Base64;
+
 #import "CodingValueTransformer.h"
 
 static NSString *kValueKey = @"Value";
